@@ -1,0 +1,314 @@
+@font-face {
+  	font-family: "futura-lt-book";
+ 	src: url("../fonts/futura-lt-book.ttf") format("truetype");
+}
+
+@font-face {
+  	font-family: "SourceSansPro-Light";
+ 	src: url("../fonts/SourceSansPro-Light.ttf") format("truetype");
+}
+
+
+
+// color
+$black: #000000;
+
+//mixins
+@mixin font-bolder{
+	font-weight: 800;
+}
+@mixin fade-in-transition{
+	transition: border-bottom 0.5s;
+}
+
+@mixin border-radii($topleft, $topright, $bottomright, $bottomleft) {
+	border-top-left-radius: $topleft;
+	border-top-right-radius: $topright;
+	border-bottom-right-radius: $bottomright;
+	border-bottom-left-radius: $bottomleft;
+	-webkit-border-top-left-radius: $topleft;
+	-webkit-border-top-right-radius: $topright;
+	-webkit-border-bottom-right-radius: $bottomright;
+	-webkit-border-bottom-left-radius: $bottomleft;
+	-moz-border-radius-topleft: $topleft;
+	-moz-border-radius-topright: $topright;
+	-moz-border-radius-bottomright: $bottomright;
+	-moz-border-radius-bottomleft: $bottomleft;
+}
+@mixin font-10{
+	font-size: 10px;
+}
+@mixin font-12{
+	font-size: 12px;
+}
+@mixin font-13{
+	font-size: 13px;
+}
+@mixin font-18{
+	font-size: 18px;
+}
+
+@mixin font-24{
+	font-size: 24px;
+}
+@mixin font-34{
+	font-size: 34px;
+}
+@mixin font($font-size){
+	font-size: $font-size;
+}
+@mixin font-weight($font-weight){
+	font-weight: $font-weight;
+}
+@for $i from 1 through 5 {
+    .work-#{$i} {
+       background-image: url(../img/#{$i}.jpg);
+    }
+
+}
+
+//common classes
+.clearfix{
+	display: block;	
+	clear: both;
+}
+.button{
+	padding: 10px 20px;
+	text-decoration: none;
+	border: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	@include font-10;
+	@include font-bolder;
+	@include border-radii(0,20px, 0, 20px);
+}
+.black-button{
+	
+	color: white;
+	background-color: black;
+	background: linear-gradient(to right, #fe2b60 50%, white 50%);
+	background-size: 200% 100%;
+	background-position: right bottom;
+	transition: all 0.5s ease-out;
+	position: relative;
+	z-index: 2;
+
+  	&:hover{
+		background-position: left bottom;
+		z-index: 2;
+  	}
+
+  	.text {
+	  text-align: center;
+	  color: white;
+	  transition: all .6s ease-out;
+	}
+
+
+  	> .black-button-overlay{
+  		@include border-radii(0,20px, 0, 20px);
+		//padding: 10px 20px;
+  		position: absolute;
+  		left: 0;
+  		top: 0;
+  		width: 100%;
+  		height: 100%;
+  		background-color: $black;
+  		z-index: -1;
+
+  	}
+}
+
+.transparent-button{
+	background-color: transparent;
+}
+
+
+
+body{
+	font-family: 'futura-lt-book';
+	overflow-x: scroll;
+}
+
+header{
+	margin-left: 5%;
+	margin-right: 5%;
+	#menu{
+		@include font-13;
+		height: 36px;
+		padding-top: 30px;
+		#logo{
+			float: left;
+			img{
+				width: 50px;
+				height: auto;
+				vertical-align: middle;
+			}
+
+			#logo-2{
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+		}
+		ul{
+			float: right;
+			li{	
+				display: inline-block;
+				margin-left: 36px;
+				border-bottom: 2px solid transparent;
+				@include fade-in-transition;
+				position: relative;
+
+				&.active{
+					border-bottom: 2px solid #bcbcbc;
+
+				}
+				&:hover{
+					border-bottom: 2px solid $black;
+					@include fade-in-transition;
+				}
+
+				a{
+					line-height: 35px;
+					text-decoration: none;
+					font-family: 'futura-lt-book';
+					color: $black;
+					@include font-bolder;
+				}
+				&.contact{
+					&:after{
+						content: url('../img/talk.svg');
+						position: absolute;
+						top: 0;
+						right: -20px;
+						width: 15px;
+						height: auto;
+
+					}
+				}
+			}	
+		}
+	}
+}
+
+.section{
+    display: inline-flex;
+	
+	padding-top: 10%;
+
+	#about{
+		padding-left: 3em;
+		padding-right: 3em;
+		width: 30em;
+		white-space: normal;
+		#heading{
+			> div{
+				@include font-34;
+				text-transform: uppercase;
+				font-weight: 900;
+				line-height: 1.1em;
+			}
+			p{
+				margin-top: 0.5em;
+				@include font-18;
+				line-height: 1.5em;
+				font-family: 'SourceSansPro-Light';
+			}
+		}
+		.know-more{
+			margin-top: 2em;
+		}
+		.button{
+			&.see-work{
+				position: relative;
+				transition: all 0.2s ease-in;
+				&:after{
+					content: url('../img/flecha.svg');
+					width: 15px;
+					height: auto;
+					position: absolute;
+					right: 0;
+					top: 10px;
+				}
+				&:hover{
+					transition: all 0.2s ease-in;
+					color: #fe2b60;
+				}
+			}
+		}
+	}
+	#work{
+		padding-left: 3em;
+		padding-right: 3em;
+		display: inline-flex;
+
+		.work{
+			//display: block;
+			width: 30em;
+			height: 30em;
+			@include border-radii(0,20px, 0, 20px);
+			background-position: center center;
+			background-size: cover;
+			float: left;
+			margin: 2em;
+			position: relative;
+
+			.work-overlay{
+				position: absolute;
+				@include border-radii(0,20px, 0, 20px);
+				background-color: rgba(0,0,0,0.5);
+				left: 0;
+				top: 0;
+				opacity: 0;
+				width: 100%;
+				height: 100%;
+
+				.work-overlay-text{
+
+					.work-heading{
+						@include font(34px);
+						@include font-weight(bolder);
+						line-height:1.1em;
+						
+					}
+					.work-type{
+						@include font(12px);
+						letter-spacing: 1px;
+
+					}
+					text-transform: uppercase;
+					color: #fff;
+					position: absolute;
+					padding-left: 50px;
+					padding-bottom: 50px;
+					bottom: 0;
+					left: 0;
+				}
+
+				&.active-overlay{
+					opacity: 1;
+					transition: opacity 0.2s linear;
+				}
+			}
+			&.activeBanner{
+			}
+			.work-description{
+				white-space: pre-line;
+				font-family: 'SourceSansPro-Light';
+				@include font(18px);
+				line-height: 1.2em;
+			}
+
+			&.expand{
+				transform: translateX(0);
+			}
+		}
+	}
+}
+section{
+	white-space:nowrap;
+    //overflow-x:scroll;
+    width: 100%;
+}
